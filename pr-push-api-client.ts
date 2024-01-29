@@ -25,11 +25,11 @@ export async function pushApiStart(
         await oldReg.unregister();
     }
 
+
+    const registration = await navigator.serviceWorker.register(serviceWorkerPath);
     navigator.serviceWorker.onmessage = e => {
         onMessage(e);
     }
-
-    const registration = await navigator.serviceWorker.register(serviceWorkerPath);
     try {
         return await registration.pushManager.subscribe({
             userVisibleOnly: true,
